@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+    .container {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -100px;
+    }
+
+    footer {
+        text-align: center;
+        padding: 3px;
+        color: white;
+    }
+</style>
+
+
+
+<main>
+
+
+
+    <body class="container">
+        <div>
+            <label>Enter Some Text</label>
+
+        </div>
+
+        <div>
+
+            <textarea id="text" style="width: 100%; max-width: 100%; min-width: 100%; padding: 10px;" rows="1">
+        </textarea>
+            <button id="check">
+                SUBMIT
+            </button>
+
+            <div id="response">
+            </div>
+
+            <div id="resp" style="
+            width: 100%;
+            max-width: 100%;
+            min-width: 100%;
+            margin-top: 20px;
+            font-size: 50px;
+          "></div>
+
+
+
+
+    </body>
+
+    <footer>
+        <p><br>
+            <a href="https://github.com/dwnsl/CreativeProject2">My GitHub</a>
+        </p>
+    </footer>
+
+</main>
+
+<body>
+    <script>
+
+      window.onload = function () {
+        document.getElementById("check").addEventListener("click", function () {
+          fetch("https://sentim-api.herokuapp.com/api/v1/", {
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify({
+              text: document.getElementById("text").value,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              document.getElementById("resp").innerText = "This Response is " + data.result.type;
+            });
+        });
+      };
+    
+    </script>
+
+</body>
+
+
+
+</html>
